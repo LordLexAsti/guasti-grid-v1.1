@@ -1,0 +1,672 @@
+# GUASTI GRID v1.1 — Formalisation YAML/Markdown
+
+```yaml
+---
+metadata:
+  title: "Guasti Grid v1.1 — Formal Architecture for Responsibility in Lethal Decision Systems"
+  author: "Alexandre Guasti (Your Android)"
+  date: "2026-03-04"
+  status: "preprint"
+  license: "CC BY 4.0"
+  github: "https://github.com/LordLexAsti/guasti-grid-v1.1"
+
+---
+
+## 0. QUICK REFERENCE TABLE
+
+| Element | Symbol | Meaning |
+|---------|--------|---------|
+| **Actors** | F, C, G, K, O, V | Financeur, Concepteur, Gouvernement, Kommandement, Opérateur, Victimes |
+| **Responsibility** | R^plan, R^design, R^auth, R^command, R^exec | Planning, Design, Authorization, Command, Execution |
+| **Repair types** | P^truth, P^material, P^symbolic, P^structural | Truth, Material, Symbolic, Structural |
+| **Responsibility predicate** | Resp(x,ℓ) | x is responsible for lethal act ℓ |
+| **Real capacity** | κ_i ∈ [0,1] | Real power to refuse/redirect (not theoretical) |
+| **Lethal event** | ℓ | A killing or attempted killing |
+| **Machine** | M | AI/technical artefact (never a node) |
+| **Audience** | A, H | Administrés (political), Humanité (universal) |
+
+---
+
+## 1. FORMAL UNIVERSE
+
+### 1.1 Sets
+
+```yaml
+Sets:
+  Actors: 
+    symbol: "𝒜"
+    members: [F, C, G, K, O, V]
+    definition: "Human/institutional nodes that bear responsibility"
+  
+  Responsibilities:
+    symbol: "ℛ"
+    members: 
+      - R^plan: "Financier/strategic planning"
+      - R^design: "Technical conception & certification"
+      - R^auth: "Authorization & doctrine"
+      - R^command: "Operational command"
+      - R^exec: "Execution decision"
+    definition: "Types of accountability each actor must bear"
+  
+  Repair_Types:
+    symbol: "𝒫"
+    members:
+      - P^truth: "Public acknowledgement & reconstruction"
+      - P^material: "Compensation, aid, material redress"
+      - P^symbolic: "Apology, recognition, ceremony"
+      - P^structural: "Institutional reform, non-repetition"
+    definition: "How responsibility is discharged post-harm"
+  
+  Audiences:
+    symbol: "Addr"
+    members:
+      - A: "Administrés — political community (citizens)"
+      - H: "Humanité — broader human community"
+    definition: "Who the responsible actor must answer to"
+```
+
+---
+
+## 2. NODES — Formal Typing
+
+### 2.1 Node Definition
+
+```yaml
+Node_Definition: |
+  N_i := (i, ρ(i), π(i), κ_i)
+  
+  where:
+    i ∈ 𝒜           = actor label
+    ρ(i) ⊆ ℛ         = set of responsibilities
+    π(i) ⊆ 𝒫         = set of repair obligations
+    κ_i ∈ [0,1]      = real capacity to refuse/redirect
+```
+
+### 2.2 Canonical Nodes
+
+```yaml
+Nodes:
+  Financier:
+    symbol: "N_F"
+    actor: "F"
+    responsibilities: [R^plan]
+    repairs: [P^structural, P^material]
+    capacity: "κ_F: Power to condition funding, impose audit, kill-switch"
+    examples: 
+      - Parlement français (budget, LPM votes)
+      - DGA (achat, contrats, certification)
+  
+  Concepteur:
+    symbol: "N_C"
+    actor: "C"
+    responsibilities: [R^design]
+    repairs: [P^structural, P^material]
+    capacity: "κ_C: Power to refuse design, impose constraints, certify limits"
+    examples:
+      - Industriels (Thales, Airbus DS, etc.)
+      - Anthropic (garde-fous intégrés)
+  
+  Gouvernement:
+    symbol: "N_G"
+    actor: "G"
+    responsibilities: [R^plan, R^auth]
+    repairs: [P^truth, P^symbolic, P^structural]
+    capacity: "κ_G: Power to set doctrine, ROE, legal framework"
+    note: "In France: N_G = N_G^budget ⊕ N_G^doctrine (dépliage fonctionnel)"
+    examples:
+      - Président, Gouvernement (stratégie)
+      - Ministère des Armées (doctrine)
+      - Conseil constitutionnel (cadre juridique)
+  
+  Kommandement:
+    symbol: "N_K"
+    actor: "K"
+    responsibilities: [R^command]
+    repairs: [P^truth, P^structural]
+    capacity: "κ_K: Power to activate/refuse modes, protect refusal right, escalate"
+    examples:
+      - Théâtre opérationnel (général commandant)
+      - Escadron drone (capitaine)
+  
+  Opérateur:
+    symbol: "N_O"
+    actor: "O"
+    responsibilities: [R^exec]
+    repairs: [P^truth]
+    capacity: "κ_O: Real power to say NO (time, info, legal right, no retaliation risk)"
+    critical: "κ_O < τ ⟹ responsibility escalates to K, G, C"
+    examples:
+      - Pilote drone
+      - Officier décisionnel
+  
+  Victimes:
+    symbol: "N_V"
+    actor: "V"
+    responsibilities: [] # empty — victims bear no causal responsibility
+    repairs: [P^truth, P^material, P^symbolic]
+    capacity: "κ_V = ∅ (victims have right to demand, not to decide)"
+    examples:
+      - Civils tués
+      - Familles
+      - Communautés affectées
+      - Juridictions (au sens post-facto)
+```
+
+### 2.3 Machine is NOT a Node
+
+```yaml
+Machine_Constraint: |
+  M (IA, algorithme) n'est JAMAIS un nœud :
+  
+  ¬∃ a ∈ IA : a ∈ 𝒜
+  ¬∃ a ∈ IA : ρ(a) ≠ ∅
+  ¬∃ a ∈ IA : π(a) ≠ ∅
+  
+  Machine est une arête instrumentale (edge), jamais responsable moralement.
+  L'arête dégénère en "quasi-nœud de facto" si κ_O trop bas.
+```
+
+---
+
+## 3. RESPONSIBILITY PREDICATE
+
+### 3.1 Definition
+
+```yaml
+Responsibility_Predicate:
+  formula: "Resp(x, ℓ) ⟺ Addr(x, V) ∧ Imput(x, ℓ) ∧ Cap(x)"
+  
+  Components:
+    Addr_x_V: |
+      "Adressability: x can be questioned by V (victims/courts/public)"
+      "Why did you decide? On what authority? By what norm?"
+    
+    Imput_x_l: |
+      "Imputability: act ℓ is causally/morally traceable to x"
+      "Not a 'cloud of causation', not algorithmic diffusion"
+    
+    Cap_x: |
+      "Capacity: x had real power to refuse/redirect at the moment"
+      "Not theoretical, not cosmetic, not under coercion"
+
+Meaning: |
+  An actor x is responsible for lethal act ℓ if and only if:
+  - Someone can address them morally/legally
+  - The act is imputable to them (not to 'the machine')
+  - They had real capacity to say NO
+  
+  Missing any one ⟹ x is not truly responsible (cosmetic responsibility)
+```
+
+---
+
+## 4. AXIOMS
+
+### 4.1 Axiom A — Ubuntu's Core (Non-Delegation to AI)
+
+```yaml
+Axiom_A_NonDelegation:
+  formula: "∀ℓ ∈ 𝒵_lethal : ¬∃ a ∈ IA : Resp(a, ℓ)"
+  
+  meaning: |
+    For every lethal act ℓ, there does NOT exist an AI/machine a
+    that bears moral/legal responsibility.
+    
+    The machine CANNOT satisfy Resp(x,ℓ) because:
+    - M is not addressable (no tribunal can question a rock)
+    - M has no moral intentionality
+    - M cannot be pardoned or reformed
+    
+  consequence: |
+    "c'est l'IA qui a tiré" is a type error, not a description.
+    It attempts to assign responsibility to a non-responsible entity.
+    
+    This is ontologically forbidden.
+```
+
+### 4.2 Axiom B — Phantom Interdiction
+
+```yaml
+Axiom_B_PhantomInterdiction:
+  formula: "∀ℓ ∈ 𝒵_lethal : ∃x ∈ {F,C,G,K,O} : Resp(x, ℓ)"
+  
+  meaning: |
+    Every lethal act must have at least ONE identifiable human/institutional
+    subject who bears responsibility.
+    
+    No "event without author."
+    No technical accident that dissolves into diffusion.
+    
+  consequence: |
+    If all five human divisors fail Resp(x,ℓ), then the system is:
+    - Ontologically orphaned
+    - Morally unrecoverable
+    - Not Ubuntu-compatible by construction
+```
+
+### 4.3 Axiom C — Double Audience (Ubuntu Beyond Borders)
+
+```yaml
+Axiom_C_DoubleAudience:
+  formula: "∀x ∈ {F,C,G,K,O} : Addr(x) ⊇ {A, H}"
+  
+  meaning: |
+    Every actor must be accountable to TWO audiences:
+    - A (Administrés): the political community (citizens)
+    - H (Humanité): broader humanity (including enemy, foreigners, future generations)
+    
+  implication_for_war: |
+    Even when political "us" is broken (war ≠ peace),
+    the universal "us" (humanity) cannot be broken.
+    
+    Enemy may be excluded from A (political), never from H (human).
+    
+  operationalization: |
+    Before war: justify to A + H (political + moral accountability)
+    During war: apply DIH (distinction, proportionality) = protecting H
+    After war: Truth Commission = restoring relation to H (if not to A)
+```
+
+### 4.4 Axiom D — Capacity Floor (Anti-Cosmetic Responsibility)
+
+```yaml
+Axiom_D_CapacityFloor:
+  formula: "κ_O ≥ τ  ∨  Resp(O, ℓ) := ⊥"
+  
+  meaning: |
+    If operator's real capacity to refuse is below threshold τ,
+    then operator is NOT truly responsible.
+    Responsibility ESCALATES to K, C, G.
+    
+  τ_components:
+    time: "Minimum deliberation time (not coerced by tempo)"
+    info: "Access to raw data, uncertainties, alternatives"
+    legal: "Right to refuse without retaliation risk"
+    hierarchy: "No implicit coercion ('disobey and be fired')"
+    interface: "Symmetric UI (equal friction on YES and NO)"
+  
+  consequence_if_κ_O_low: |
+    O becomes a "tampon" (buffer absorbing blame).
+    Imputability automatically redistributes:
+    
+    κ_O < τ  ⟹  Resp(K, ℓ)↑  ∧  Resp(C, ℓ)↑  ∧  Resp(G, ℓ)↑
+    
+    Cannot stop at O. Must audit K, G, C FIRST.
+```
+
+### 4.5 Axiom E — Enforcement Dual-Leg
+
+```yaml
+Axiom_E_EnforcementDualLeg:
+  formula: "∀Resp(x,ℓ) : (Leg_internal(x) ≠ ∅) ∧ (Leg_external(x) ≠ ∅)"
+  
+  Leg_Internal: |
+    DIH Article 91 (Protocole additionnel I):
+      "The Party to the conflict shall be liable to pay compensation
+       for loss or damage caused by violations of this Protocol."
+    
+    French law (Code pénal 122-4):
+      "An order from authority does NOT justify act if order
+       is manifestly illegal."
+    
+    Control mechanisms:
+      - Parlement (budget votes, investigations)
+      - Juge administratif (Conseil d'État)
+      - Juge pénal (if gross violation)
+      - Internal discipline
+  
+  Leg_External: |
+    International pressure:
+      - Alliance conditions (NATO interoperability)
+      - Export controls
+      - Reputation damage
+      - UN mechanisms (not perfect, but real)
+    
+    Normative anchors:
+      - DIH consensus (not backed by sheriff, but by community)
+      - Precedent (Nuremberg, Rwanda, Yugoslavia)
+
+  Consequence: |
+    Responsibility is NOT toothless (internal levers exist).
+    But enforcement is imperfect (accept this realism).
+    
+    Dual-leg prevents fantasy of perfect justice,
+    while preventing fantasy of zero accountability.
+```
+
+---
+
+## 5. GRAPHS — Decision vs Repair
+
+### 5.1 Decision Graph
+
+```yaml
+Graph_Decision:
+  symbol: "𝒢_D = (𝒜 \\ {V}, E_D)"
+  
+  definition: |
+    Directed graph where nodes are non-victim actors,
+    edges represent causal/decisional contribution.
+  
+  canonical_chain: |
+    F →^{R^plan} G →^{R^auth} C →^{R^design} K →^{R^command} O →^{R^exec} ℓ → V
+    
+    Alternative paths (parallel):
+      G →^{R^plan} C (doctrine informs design)
+      K ←^{R^command} G (commander receives ROE from govt)
+    
+  invariant: |
+    M (machine) is NEVER a node in 𝒢_D.
+    M appears as an edge label (info flow), never as decision node.
+    
+    Example:
+      O →^{M_info} recommendation (machine informs)
+      but O →^{M_executes} action is FORBIDDEN
+```
+
+### 5.2 Repair Graph
+
+```yaml
+Graph_Repair:
+  symbol: "𝒢_P = (𝒜, E_P)"
+  
+  definition: |
+    Directed graph where edges lead FROM actors TO victims V,
+    labeled by repair obligations π(i).
+  
+  canonical_structure: |
+    F →^{P^structural} V
+    C →^{P^structural, P^material} V
+    G →^{P^truth, P^symbolic, P^structural} V
+    K →^{P^truth, P^structural} V
+    O →^{P^truth} V
+    
+    (V has no outgoing edges — victims are sinks in repair graph)
+  
+  invariant: |
+    ∀ℓ ∈ 𝒵 : ∃ path from V to {F,G} labeled (P^truth ∪ P^structural)
+    
+    This ensures: "continuité des pouvoirs publics"
+    Even if intermediate nodes disappear, V can reach the state.
+    
+  consequence: |
+    If no path from V back to state authority ⟹ Ubuntu impossible.
+    No "us" remains recoverable.
+```
+
+---
+
+## 6. COLUMN OF AN ACT — Completeness Metric
+
+### 6.1 Column Definition
+
+```yaml
+Column_Definition:
+  formula: "Col(ℓ) := { n ∈ {F,C,G,K,O} | n causally pertinent to ℓ }"
+  
+  meaning: |
+    For any lethal act ℓ, the "column" is the minimal set of human actors
+    whose contribution was necessary.
+    
+    NOT the set of all humans involved (too broad).
+    The DIVISORS of the act (in Guasti sense).
+  
+  example_autonomous_drone: |
+    Act ℓ = "drone fires at target in urban zone"
+    
+    Supposedly autonomous:
+      Col(ℓ) should include {C, G, K} at minimum (doctrine, design, activation)
+      
+    But if interface is opaque + pressure high + K unavailable:
+      O becomes "divisor by default" (blame lands here)
+      Yet O had κ_O < τ (no real capacity)
+      
+    ⟹ Column is INCOMPLETE (O cannot truly be divisor)
+    ⟹ System is pathological
+```
+
+### 6.2 Completeness Score Ω(ℓ)
+
+```yaml
+Omega_Definition:
+  formula: "Ω(ℓ) := |Col(ℓ)| / 5"
+  
+  range: "[0, 1]"
+  
+  interpretation: |
+    Ω = 1.0  ⟹ All five divisors (F,C,G,K,O) are pertinent
+    Ω = 0.8  ⟹ Four divisors (e.g., missing F)
+    Ω = 0.6  ⟹ Three divisors
+    Ω = 0.4  ⟹ Two divisors (dangerous: too few)
+    Ω = 0.2  ⟹ One divisor (catastrophic: blame one person)
+    Ω = 0.0  ⟹ No human divisors (act is fully autonomous)
+  
+  decision_rule: |
+    Ω < 0.6  ⟹ System is NOT Ubuntu-compatible
+    Ω ≥ 0.8  ⟹ System has good accountability structure
+```
+
+### 6.3 Admissibility Score Ψ(ℓ)
+
+```yaml
+Psi_Definition:
+  formula: "Ψ(ℓ) := Ω(ℓ) · 𝟙[AuditPossible(ℓ)] · 𝟙[∃Repair_Path] · 𝟙[Addr ⊇ {A,H}]"
+  
+  components:
+    Omega: "Column completeness (0 to 1)"
+    
+    AuditPossible: |
+      Can an independent body reconstruct the chain?
+      Requires: logs, decision traces, non-black-box AI
+      Binary: 1 if yes, 0 if impossible
+    
+    Repair_Path: |
+      Does a path V → state authority exist?
+      Binary: 1 if G or F reachable, 0 if V is orphaned
+    
+    DoubleAudience: |
+      Are both A (citizens) and H (humanity) in the accountability loop?
+      Binary: 1 if yes, 0 if only domestic audience
+
+  interpretation: |
+    Ψ = 1.0  ⟹ Act is fully Ubuntu-compatible
+               All columns visible, auditable, reparable, universally answerable
+    
+    Ψ = 0.7  ⟹ Mostly good, some gaps (e.g., audit partial)
+    
+    Ψ = 0.4  ⟹ Major failures: completeness low OR repair path missing
+    
+    Ψ = 0.0  ⟹ System is ontologically orphaned
+               No responsible subject, no audit, no repair, no universal answer
+
+  decision_rule: |
+    Ψ < 0.6  ⟹ ACT IS FORBIDDEN (not Ubuntu-compatible)
+    Ψ ≥ 0.7  ⟹ ACT IS ADMISSIBLE (with conditions)
+```
+
+---
+
+## 7. OPERATOR CAPACITY Λ_O(ℓ)
+
+### 7.1 Real Refusal Capacity
+
+```yaml
+Lambda_O_Definition:
+  formula: "Λ_O(ℓ) := f(T, A, H, I, R)"
+  
+  components:
+    T_time: |
+      Time available for genuine deliberation
+      Not coerced by enemy action / tactical urgency
+      
+      Range: [0,1]
+      1.0 = operator has hours to think
+      0.0 = sub-second decision forced
+    
+    A_asymmetry: |
+      Epistemic gap between AI recommendations and operator understanding
+      How much does operator understand what the AI is doing?
+      
+      Range: [0,1]
+      1.0 = operator understands all uncertainties, has raw data access
+      0.0 = AI is a black box, operator just validates recommendations
+    
+    H_hierarchy: |
+      Social/military cost of refusing order
+      Can operator say NO without implicit/explicit retaliation?
+      
+      Range: [0,1]
+      1.0 = refusal is legally protected, no career cost
+      0.0 = refusal means dismissal, court martial, or worse
+    
+    I_interface: |
+      Quality of UI for decision-making
+      Is UI symmetric (equal friction on YES and NO)?
+      Can operator see alternatives?
+      
+      Range: [0,1]
+      1.0 = both options (fire/don't fire) equally accessible
+      0.0 = UI pushes toward firing (dark pattern)
+    
+    R_roe: |
+      Clarity of rules of engagement
+      Are ROE clear, published, legally defensible?
+      
+      Range: [0,1]
+      1.0 = ROE explicit, legally vetted, culturally understood
+      0.0 = ROE ambiguous, operator must guess intent
+
+  aggregation: |
+    Λ_O(ℓ) = min(T, A, H, I, R)  [OR weighted average, depending on context]
+    
+    Logic: if ANY component fails (e.g., H=0 because refusal is career suicide),
+    then overall capacity is destroyed.
+    
+  threshold: |
+    τ (context-dependent, typically 0.6–0.7)
+    
+    Λ_O(ℓ) ≥ τ  ⟹  O can bear full Resp(O, ℓ)
+    Λ_O(ℓ) < τ  ⟹  O is cosmetic, Resp escalates to K, G, C
+```
+
+---
+
+## 8. INTERFACE QUALITY Q_I
+
+### 8.1 Dimensions
+
+```yaml
+QI_Definition:
+  formula: "Q_I(C, O, ℓ) ∈ [0,1]"
+  
+  meaning: |
+    Measure of how well the interface between machine (designed by C)
+    and operator (O) supports genuine human decision-making.
+  
+  five_dimensions:
+    symmetry_buttons: |
+      Are FIRE and DON'T FIRE buttons equally accessible?
+      Or does UI dark-pattern push toward FIRE?
+      
+      1.0 = identical size, color, position, latency
+      0.0 = FIRE is large/green, DON'T FIRE is small/hidden
+    
+    uncertainty_display: |
+      Are AI uncertainties visibly shown?
+      Can operator see confidence intervals, alternatives, edge cases?
+      
+      1.0 = "AI says 80% certain it's combatant, 20% could be civilian"
+      0.0 = "AI recommends: FIRE" (no numbers, no doubt shown)
+    
+    raw_data_access: |
+      Can operator see the raw sensor data (not just AI interpretation)?
+      Or is operator locked out of the reasoning?
+      
+      1.0 = "Here's the video feed, here's the AI's annotation, compare"
+      0.0 = "AI processed this. Trust me."
+    
+    friction_time: |
+      Is there mandatory pause/reflection time?
+      Or is operator in a reflex-response race?
+      
+      1.0 = minimum 30–60 sec to review before final commit
+      0.0 = sub-second response demanded
+    
+    refusal_option: |
+      Is there a visible "ESCALATE / REPORT / ASK FOR REVIEW" button?
+      Or does operator have only two choices: FIRE or SILENT REFUSAL?
+      
+      1.0 = "Click here to escalate to K before deciding"
+      0.0 = No escalation path shown; refuse silently at own risk
+  
+  aggregation: |
+    Q_I = (w1 · symmetry + w2 · uncertainty + w3 · raw_data + w4 · friction + w5 · refusal)
+    
+    with equal weights (w_i = 0.2) by default.
+    
+  threshold: |
+    Q_I ≥ 0.7  ⟹ Interface supports genuine human decision
+    Q_I < 0.7  ⟹ Interface is degraded (Λ_O will suffer)
+```
+
+---
+
+## 9. TEMPO MATRIX — Graceful Degradation
+
+### 9.1 Three Levels
+
+```yaml
+Tempo_Framework:
+  principle: |
+    "Responsibility structure degrades GRACEFULLY under operational stress,
+     but NEVER loses the invariant: someone remains namnably responsible."
+
+Level_1_Peace_LowIntensity:
+  triggers: "1–5 incidents per day, normal operational tempo"
+  
+  interface: FULL
+    - Full situational display (all systems)
+    - All alternatives shown
+    - Deliberative friction (time to think)
+    - Escalation to K is routine
+    - Post-action documentation is comprehensive
+  
+  dialogue_and_repair: FULL
+    - Commissions mix with populations
+    - 30–90 day resolution expected
+    - Victims participate in fact-finding
+  
+  Ubuntu_status: STRONG
+    - All five divisors are visible and active (Ω ≈ 1.0)
+    - Ψ ≈ 0.9 (mostly admissible)
+  
+  responsibility_model: "Full accountability. All Resp(x,ℓ) can be substantive."
+
+Level_2_MediumIntensity:
+  triggers: "5–20 incidents per day, sustained operations"
+  
+  interface: SIMPLIFIED
+    - Core maintained: alternatives, refusal rights, decision block
+    - Secondary displays deferred
+    - UI asymmetry tolerated (slightly faster YES path)
+    - Escalation to K is still possible but streamlined
+    - Logging non-negotiable (even if post-processing deferred)
+  
+  dialogue_and_repair: DEFERRED
+    - Systematic but delayed (7–14 days for standard incidents)
+    - Truth commissions during conflict, not after
+    - Post-conflict review of incidents
+  
+  Ubuntu_status: MAINTAINED (with STRAIN)
+    - Divisors F,C,G,K remain visible
+    - O remains a divisor IF Λ_O(ℓ) ≥ 0.5
+    - Ω ≈ 0.75–0.8 (most divisors intact)
+    - Ψ ≈ 0.6–0.7 (admissible but stressed)
+  
+  invariant: "Someone named remains responsible. Dialogue remains possible."
+
+Level_3_HighIntensity_War:
+  triggers: "20+ incidents per day, chaos, survival-mode operations"
+  
+  interface: MINIMAL
+    - Only: "I DOUBT" button → escalates immedia
