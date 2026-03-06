@@ -159,6 +159,84 @@ Montre que le design de l'interface distribue concrètement le pouvoir de compre
 ### 10. Tempo opérationnel
 Pense la dégradation des garanties de responsabilité selon le niveau d'intensité des opérations, sans jamais admettre la disparition complète d'un sujet responsable.
 
+## Présentation publique
+
+### Texte de quatrième de couverture
+
+**Qui répond quand la machine tue ?**
+
+À mesure que les systèmes létaux assistés par logiciel, algorithme ou intelligence artificielle se développent, une question devient inévitable : **qui répond de la mort produite ?**
+
+Ce projet part d'une intuition simple, mais décisive : une machine peut participer à une chaîne causale ; elle ne peut pas porter une responsabilité morale, politique ou juridique. Lorsqu'un acte létal survient, la responsabilité ne disparaît pas dans la technique. Elle demeure humaine et institutionnelle.
+
+À partir de cette thèse, *guasti-grid-v1.1* propose une grammaire claire de la responsabilité dans les architectures de décision létale. Il examine :
+- qui rend l'acte possible ;
+- qui peut le comprendre, l'interrompre ou le rediriger ;
+- qui doit en répondre ;
+- et qui doit réparation aux victimes.
+
+Le projet ne cherche pas à moraliser abstraitement la technologie. Il vise plus concrètement à empêcher une forme contemporaine d'irresponsabilité organisée : celle dans laquelle la complexité des systèmes, la distribution des rôles, l'opacité des interfaces et la vitesse des opérations rendent l'auteur de l'acte à la fois diffus et pratiquement introuvable.
+
+Dans cette perspective, la question centrale n'est pas seulement : **y a-t-il un humain dans la boucle ?** La question décisive devient : **cet humain pouvait-il réellement dire non ?**
+
+En distinguant la chaîne de décision et la chaîne de réparation, en analysant la capacité réelle des opérateurs, le rôle du commandement, du gouvernement, des concepteurs et des financeurs, ce travail fournit une grille rigoureuse pour penser ce que beaucoup de discours techniques préfèrent laisser dans l'ombre : la structure politique de la mise à mort.
+
+Plus qu'une formalisation, ce texte est une exigence : **aucun système létal ne devrait être assez sophistiqué pour tuer plus vite qu'il ne permet d'établir qui devait répondre de la mort.**
+
+## FAQ de défense contre critiques agressives
+
+### 1. Votre projet n'est-il pas simplement un manifeste anti-IA ?
+Non. Le projet ne repose pas sur une condamnation générale de l'IA. Il porte sur un problème plus précis : les conditions sous lesquelles une décision létale reste politiquement, moralement et juridiquement imputable. Son point central n'est pas « la technique est mauvaise », mais « la technique ne doit pas servir à effacer la responsabilité ».
+
+### 2. Pourquoi affirmer qu'une machine ne peut pas être responsable ?
+Parce que la responsabilité normative ne se réduit pas à l'implication causale. Être responsable suppose de pouvoir être interpellé, questionné, jugé et sommé de répondre. Une machine peut produire un effet ; elle ne peut pas assumer une dette morale, juridique ou politique envers des victimes.
+
+### 3. Mais si un système agit de manière autonome, n'est-il pas logique de lui attribuer une part de responsabilité ?
+Non, pas au sens fort. L'autonomie technique décrit une modalité d'exécution. Elle ne crée pas, à elle seule, un sujet moral ou juridique. Confondre autonomie fonctionnelle et responsabilité normative revient à transformer une propriété opératoire en personnalité politique.
+
+### 4. Votre critique ne sous-estime-t-elle pas la complexité réelle des chaînes de décision contemporaines ?
+Au contraire. Le projet part précisément de cette complexité. Il soutient seulement que la complexité ne peut pas servir d'alibi à l'irresponsabilité. Plus la chaîne est distribuée, plus il faut cartographier rigoureusement les niveaux de décision, de contrainte et de contrôle.
+
+### 5. Pourquoi attaquer la notion de « human in the loop » ?
+Le projet ne l'attaque pas en tant que telle ; il conteste son usage comme garantie automatique. La présence d'un humain ne suffit pas. Encore faut-il que cet humain dispose d'une capacité réelle de comprendre, d'hésiter, de refuser ou d'escalader la décision sans subir une contrainte écrasante.
+
+### 6. Vous semblez vouloir disculper l'opérateur au profit des niveaux supérieurs.
+Non. Le projet ne disculpe pas l'opérateur par principe. Il refuse simplement qu'il serve de réceptacle commode à une responsabilité produite ailleurs. Si l'opérateur disposait d'un pouvoir réel et d'une information suffisante, sa responsabilité demeure. Si ce pouvoir était fictif, il faut remonter la chaîne.
+
+### 7. Votre modèle n'est-il pas militant plutôt que scientifique ?
+Le projet est explicitement normatif. Il ne prétend pas être une science dure de la morale. Sa force tient justement au fait qu'il rend explicites ses présupposés, au lieu de les dissimuler dans un langage bureaucratique, stratégique ou industriel faussement neutre. Il s'agit d'une formalisation critique, non d'une naturalisation de la norme.
+
+### 8. Les scores et métriques proposés ne donnent-ils pas une illusion de scientificité ?
+Ce risque existe, et il doit être reconnu. Ces métriques doivent être lues comme des outils heuristiques d'audit et de comparaison, non comme des mesures absolues de la moralité. Leur fonction est de rendre visibles certaines dimensions critiques : opacité, capacité réelle, traçabilité, réparabilité.
+
+### 9. Pourquoi intégrer la qualité de l'interface dans un problème de responsabilité ?
+Parce que l'interface n'est pas neutre. Elle conditionne l'accès à l'information, la visibilité des incertitudes, la symétrie des options, le temps de réflexion et les possibilités d'escalade. En ce sens, le design distribue concrètement du pouvoir moral et politique.
+
+### 10. La responsabilité ne finit-elle pas toujours par se dissoudre dans des causalités distribuées ?
+Non. Une causalité distribuée ne signifie pas qu'il n'y a plus de responsables. Elle signifie que la responsabilité doit être pensée de manière structurée, plurielle et hiérarchisée. Le projet refuse précisément le glissement qui va de « plusieurs contributeurs » à « plus personne n'est vraiment responsable ».
+
+### 11. Pourquoi inclure financeurs, concepteurs et gouvernements, alors qu'ils ne prennent pas la décision terminale ?
+Parce qu'un acte létal ne commence pas au dernier geste. Il résulte d'un ensemble de décisions antérieures : financement, architecture technique, doctrine, règles d'engagement, configuration d'interface, niveau d'autonomie autorisé. Limiter la responsabilité au dernier opérateur revient souvent à effacer les conditions politiques et institutionnelles de possibilité de l'acte.
+
+### 12. L'idée d'une responsabilité devant « l'humanité » n'est-elle pas trop abstraite ?
+Elle est ambitieuse, et elle peut être discutée. Mais elle n'est pas vide. Le droit international humanitaire, les juridictions, les précédents historiques, les commissions d'enquête, les ONG, les médias et les formes transnationales d'interpellation montrent qu'il existe déjà des scènes de responsabilité qui débordent le seul cadre national.
+
+### 13. Votre modèle n'est-il pas trop simple pour décrire les architectures réelles ?
+Toute modélisation simplifie. La question est de savoir si cette simplification est utile. Ici, l'objectif n'est pas de reproduire toute la complexité du réel, mais de rendre visible ce que cette complexité tend souvent à masquer : qui savait, qui décidait, qui pouvait refuser, qui doit réparation.
+
+### 14. En quoi ce projet est-il utile concrètement ?
+Il fournit une grille d'analyse pour auditer des architectures létales contemporaines. Il aide à poser des questions précises sur :
+- la capacité réelle de l'opérateur ;
+- la qualité de l'interface ;
+- la traçabilité des décisions ;
+- la distribution de la responsabilité ;
+- les obligations de réparation.
+
+Son utilité est institutionnelle autant qu'intellectuelle : empêcher que la sophistication des systèmes produise une irresponsabilité structurelle.
+
+### 15. Quel est, en une phrase, le cœur de votre position ?
+Une décision létale n'est politiquement défendable que si l'on peut identifier de manière intelligible et vérifiable les humains et les institutions qui l'ont rendue possible, qui pouvaient l'interrompre, et qui devront en répondre après coup.
+
 ## Structure
 
 - `guasti-grid.yaml` : formalisation complète en YAML/Markdown.
