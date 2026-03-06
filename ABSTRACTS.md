@@ -1,6 +1,6 @@
-# Abstracts
+# guasti-grid-v1.1 — Abstracts
 
-## Résumé académique (FR)
+## Abstract — FR
 
 Ce projet propose une formalisation normative de la responsabilité dans les systèmes de décision létale assistés par logiciel, algorithme ou intelligence artificielle. Son hypothèse directrice est qu'une participation causale de la machine ne suffit jamais à fonder une responsabilité morale, politique ou juridique autonome : la responsabilité demeure humaine et institutionnelle. À partir de cette prémisse, le cadre distingue plusieurs pôles d'imputation — financeur, concepteur, gouvernement, commandement, opérateur — ainsi que les victimes comme centre des obligations de réparation.
 
@@ -12,7 +12,7 @@ Le projet n'entend pas produire une mesure exacte de la moralité des systèmes 
 
 ---
 
-## Academic Abstract (EN)
+## Abstract — EN
 
 This project proposes a normative formalization of responsibility in lethal decision systems assisted by software, algorithms, or artificial intelligence. Its guiding hypothesis is that a machine's causal participation is never sufficient to ground autonomous moral, political, or legal responsibility: responsibility remains human and institutional. On that basis, the framework distinguishes several loci of imputation—funder, designer, government, command structure, operator—while treating victims as the center of obligations of repair.
 

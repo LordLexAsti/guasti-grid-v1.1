@@ -53,7 +53,7 @@ This repository is intended as a conceptual and analytical tool for readers work
 - clarifying the relation between technical mediation and institutional answerability;
 - framing discussions of repair and post-harm obligations.
 
-## Public-facing presentation
+## Public presentation
 
 ### Back-cover style text
 
@@ -67,7 +67,7 @@ Starting from that claim, *guasti-grid-v1.1* offers a clear framework for examin
 
 More than a formal exercise, the project addresses a public concern: highly mediated systems should not make accountability harder to establish than action itself.
 
-## Frequently raised objections
+## Institutional FAQ
 
 ### Isn’t this simply an anti-AI position?
 No. The project does not offer a general condemnation of AI. It addresses a narrower question: under what conditions does a lethal decision remain politically, morally, and legally imputable?
@@ -87,7 +87,7 @@ They should be understood as heuristic tools for comparison and audit, not as ex
 ### Why include interface quality in a responsibility framework?
 Because interfaces affect access to information, visibility of uncertainty, time for reflection, and the practical possibility of escalation or refusal.
 
-## Reading the project carefully
+## Reading notes
 
 This repository is best read as a proposal for normative and institutional clarification. It does not claim to eliminate disagreement. On the contrary, it is designed to make disagreement more precise by stating its assumptions openly.
 

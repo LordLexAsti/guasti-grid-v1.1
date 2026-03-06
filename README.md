@@ -2,7 +2,7 @@
 
 Formalisation YAML/Markdown d'une architecture de responsabilité dans les systèmes de décision létale.
 
-## Niveau 1 — Version institutionnelle
+## Version institutionnelle
 
 ### Présentation concise
 
@@ -74,14 +74,14 @@ Parce que cette formule peut masquer plus qu'elle n'éclaire. La question décis
 #### Les métriques proposées ne sont-elles pas trop abstraites ?
 Elles doivent être comprises comme des outils heuristiques d'audit et de comparaison, non comme des mesures exactes de la vérité morale.
 
-### Ressources complémentaires
+## Ressources complémentaires
 
 - `ABSTRACTS.md` : résumés académiques en français et en anglais.
 - `README_EN.md` : version anglaise concise pour lectorat international, institutionnel et médiatique.
 
 ---
 
-## Niveau 2 — Version longue
+## Version longue
 
 ### Présentation développée
 
